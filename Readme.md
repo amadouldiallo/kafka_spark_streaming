@@ -108,5 +108,3 @@ We use apache superset to connect to dbs (MySQL).
 example: **Viz Total sales by sources**
 
 ![Viz](chart_sales_by_source.png "Total sales by sources")
-
-

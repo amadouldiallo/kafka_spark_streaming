@@ -4,23 +4,20 @@ from pyspark.sql.functions import *
 from pyspark.sql.types import *
 # Time
 import time
-# findspark
-import findspark
 
-# Constants
 
-KAFKA_TOPIC_NAME = "orderstopicdemo"
+KAFKA_TOPIC_NAME = "orderstopicdemo"  # topic name
 KAFKA_BOOTSTRAP_SERVER = "localhost:9092"
 CUSTOMER_FILE = "data/customers.csv"
 
 # MYSQL
 mysql_host_name = "localhost"
 mysql_port_no = "3306"
-mysql_database_name = "sales_db"
+mysql_database_name = "sales_db"  # database
 mysql_driver_class = "com.mysql.cj.jdbc.Driver"
-mysql_table_name = "total_sales_by_source_state"
+mysql_table_name = "total_sales_by_source_state" # table
 mysql_user = "root"
-mysql_password = '10a06b86z'
+mysql_password = 'PASSWORD'  # your password
 mysql_jdbc_url = "jdbc:mysql://"+mysql_host_name+":"+mysql_port_no+"/"+mysql_database_name
 
 # Cassandra
@@ -29,8 +26,6 @@ cassandra_host_name= "localhost"
 cassandra_port_no = "9042"
 cassandra_keyspace_name = "sales_ks"
 cassandra_table_name = "orders"
-
-# function
 
 
 def save_to_cassandra(current_df, epoch_id):
@@ -43,7 +38,6 @@ def save_to_cassandra(current_df, epoch_id):
         .options(table=cassandra_table_name, keyspace=cassandra_keyspace_name, )\
         .save()
     print(f"Print AFTER cassandra table save : {str(epoch_id)}")
-
 
 
 def save_to_mysql(current_df, epoch_id):
@@ -157,11 +151,4 @@ if __name__ == '__main__':
         .start()
     trans_detail_write_stream.awaitTermination()
     print("Pyspark Kafka Complete")
-    #spark.stop()
-
-
-
-
-
-
-
+    spark.stop() # stop spark session..
